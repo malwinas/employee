@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.malwinas.employee.controller.object.Degree;
+import com.malwinas.employee.controller.object.DegreeObject;
 import com.malwinas.employee.service.DegreeService;
 
 @Controller
@@ -24,8 +24,8 @@ public class DegreeController {
 	}
 	
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
-	public ResponseEntity<Collection<Degree>> getDegrees() {
-		Collection<Degree> degrees = degreeService.getDegrees();
-		return new ResponseEntity<Collection<Degree>>(degrees, HttpStatus.OK);
+	public ResponseEntity<Collection<DegreeObject>> getDegrees() {
+		Collection<DegreeObject> degrees = degreeService.getDegrees();
+		return new ResponseEntity<Collection<DegreeObject>>(degrees, HttpStatus.OK);
 	}
 }

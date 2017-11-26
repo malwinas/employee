@@ -15,11 +15,11 @@ public class ValidationService {
 		this.acceptedAttributes = Arrays.asList(acceptedAttributes);
 	}
 	
-	public Boolean isAttributeValid(String attribute) {
+	public Boolean areParametersValid(String attribute, String value) {
 		if (attribute == null)
 			return true;
 		
-		if (acceptedAttributes.contains(attribute))
+		if (acceptedAttributes.contains(attribute) && value != null)
 			return true;
 		
 		return false;

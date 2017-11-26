@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.malwinas.employee.controller.object.EmployeeObject;
 import com.malwinas.employee.exception.EmployeeNotFoundException;
-import com.malwinas.employee.exception.InvalidAttributeException;
+import com.malwinas.employee.exception.InvalidParameterException;
 import com.malwinas.employee.service.EmployeeService;
 
 @Controller
@@ -61,8 +61,8 @@ public class EmployeeController {
 		return new ResponseEntity<String>(ex.getMessage(), HttpStatus.NOT_FOUND);
 	}
 	
-	@ExceptionHandler(InvalidAttributeException.class)
-	public ResponseEntity<String> handleInvalidAttributeException(InvalidAttributeException ex) {
+	@ExceptionHandler(InvalidParameterException.class)
+	public ResponseEntity<String> handleInvalidParameterException(InvalidParameterException ex) {
 		logger.log(Level.WARNING, ex.getMessage());
 		return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 	}

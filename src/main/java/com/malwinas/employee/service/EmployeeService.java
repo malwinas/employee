@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.malwinas.employee.controller.object.EmployeeObject;
 import com.malwinas.employee.exception.EmployeeNotFoundException;
-import com.malwinas.employee.exception.InvalidAttributeException;
+import com.malwinas.employee.exception.InvalidParameterException;
 import com.malwinas.employee.model.Employee;
 import com.malwinas.employee.model.repository.EmployeeRepository;
 import com.malwinas.employee.search.EmployeeSpecification;
@@ -29,11 +29,11 @@ public class EmployeeService {
 	
 	@Transactional
 	public Long insert(EmployeeObject employeeObject) {
-		final Employee employee = new Employee(employeeObject.getFirstName(), 
+		Employee employee = new Employee(employeeObject.getFirstName(), 
 				employeeObject.getLastName(), employeeObject.getDegree(), employeeObject.getEmail());
 		
-		return employeeRepository.save(employee).getId();
-		
+		employee = employeeRepository.save(employee);
+		return employee.getId();
 	}
 	
 	@Transactional
@@ -49,8 +49,8 @@ public class EmployeeService {
 	@Transactional
 	public Collection<EmployeeObject> get(String attribute, String value) {
 		
-		if (!validationService.isAttributeValid(attribute))
-			throw new InvalidAttributeException(attribute);
+		if (!validationService.areParametersValid(attribute, value))
+			throw new InvalidParameterException(attribute, value);
 		
 		return attribute != null ? getFiltred(attribute, value) : getAll();
 	}

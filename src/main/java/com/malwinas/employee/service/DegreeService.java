@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.malwinas.employee.controller.object.Degree;
+import com.malwinas.employee.controller.object.DegreeObject;
 import com.malwinas.employee.model.repository.EmployeeRepository;
 
 @Service
@@ -18,7 +18,7 @@ public class DegreeService {
 		this.employeeRepository = employeeRepository;
 	}
 	
-	public Collection<Degree> getDegrees() {
+	public Collection<DegreeObject> getDegrees() {
 		return employeeRepository.selectDegreeAndCountGroupByDegree();
 	}
 }
