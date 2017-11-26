@@ -73,21 +73,21 @@ public class EmployeeControllerTest {
 	
 	@Test
 	public void getAllEmployeesTest() throws Exception {
-		List<Employee> employeeResult = getAllResults();
+		List<Employee> employeeResults = getAllResults();
 		
-		when(employeeRepository.findAll()).thenReturn(employeeResult);
+		when(employeeRepository.findAll()).thenReturn(employeeResults);
 		
-		String getAllResult = mockMvc.perform(get("/employee/get"))
+		String getAllResults = mockMvc.perform(get("/employee/get"))
 			.andExpect(status().isOk())
 			.andReturn().getResponse().getContentAsString();
 		
 		CollectionType type = objectMapper.getTypeFactory().constructCollectionType(List.class, EmployeeObject.class);
-		List<EmployeeObject> result = objectMapper.readValue(getAllResult, type);
+		List<EmployeeObject> results = objectMapper.readValue(getAllResults, type);
 		
 		verify(employeeRepository).findAll();
 		
-		Assert.assertNotNull(result);
-		Assert.assertEquals(employeeResult.size(), result.size());
+		Assert.assertNotNull(results);
+		Assert.assertEquals(employeeResults.size(), results.size());
 	}
 	
 	@Test
@@ -96,14 +96,14 @@ public class EmployeeControllerTest {
 		
 		when(employeeRepository.findAll(any(EmployeeSpecification.class))).thenReturn(employeeResults);
 		
-		String getFiltredResult = mockMvc.perform(get("/employee/get")
+		String getFiltredResults = mockMvc.perform(get("/employee/get")
 					.param("attribute", "lastName")
 					.param("value", "Kowal"))
 				.andExpect(status().isOk())
 				.andReturn().getResponse().getContentAsString();
 		
 		CollectionType type = objectMapper.getTypeFactory().constructCollectionType(List.class, EmployeeObject.class);
-		List<EmployeeObject> results = objectMapper.readValue(getFiltredResult, type);
+		List<EmployeeObject> results = objectMapper.readValue(getFiltredResults, type);
 		
 		verify(employeeRepository).findAll(any(EmployeeSpecification.class));
 		

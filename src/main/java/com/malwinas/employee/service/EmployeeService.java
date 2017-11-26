@@ -29,8 +29,8 @@ public class EmployeeService {
 	
 	@Transactional
 	public Long insert(EmployeeObject employeeObject) {
-		Employee employee = new Employee(employeeObject.getFirstName(), 
-				employeeObject.getLastName(), employeeObject.getDegree(), employeeObject.getEmail());
+		Employee employee = new Employee(employeeObject.getFirstName(), employeeObject.getLastName(), 
+				employeeObject.getDegree(), employeeObject.getEmail());
 		
 		employee = employeeRepository.save(employee);
 		return employee.getId();

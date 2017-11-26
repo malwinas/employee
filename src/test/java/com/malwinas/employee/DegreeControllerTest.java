@@ -49,12 +49,12 @@ public class DegreeControllerTest {
 		Collection<DegreeObject> degreeResults = getDegreeResults();
 		when(employeeRepository.selectDegreeAndCountGroupByDegree()).thenReturn(degreeResults);
 		
-		String getDegreesResult = mockMvc.perform(get("/degree/get"))
+		String getDegreeResults = mockMvc.perform(get("/degree/get"))
 			.andExpect(status().isOk())
 			.andReturn().getResponse().getContentAsString();
 		
 		CollectionType type = objectMapper.getTypeFactory().constructCollectionType(List.class, DegreeObject.class);
-		List<DegreeObject> results = objectMapper.readValue(getDegreesResult, type);
+		List<DegreeObject> results = objectMapper.readValue(getDegreeResults, type);
 		
 		verify(employeeRepository).selectDegreeAndCountGroupByDegree();
 		
